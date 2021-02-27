@@ -17,3 +17,5 @@ public final class Main extends JavaPlugin {
         System.out.print("test");
     }
 }
+
+// fuck off
