@@ -1,0 +1,4 @@
+name: Premiun_Gift
+version: ${project.version}
+main: com.qubemc.premium_gift.Main
+api-version: 1.15
