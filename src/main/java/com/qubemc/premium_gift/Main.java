@@ -14,5 +14,6 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         getLogger().info("Premium Gift Disabled");
+        System.out.print("test");
     }
 }
