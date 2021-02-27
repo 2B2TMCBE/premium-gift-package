@@ -4,4 +4,4 @@ authors:
   - Primus
   - Makc Xie
 main: com.qubemc.premium_gift.Main
-api-version: 1.15.2-R0.1-SNAPSHOT
+api-version: 1.15.2-R0.1
