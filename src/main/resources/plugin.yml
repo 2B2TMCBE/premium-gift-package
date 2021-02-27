@@ -2,6 +2,9 @@ name: Premiun_Gift
 version: ${project.version}
 authors:
   - Primus
-  - Makc Xie
+  - maxxie114
 main: com.qubemc.premium_gift.Main
-api-version: 1.15.2-R0.1
+commands:
+  test:
+    description: run a test
+    usage: "Usage: /test"
