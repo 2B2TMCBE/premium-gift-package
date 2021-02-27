@@ -1,4 +1,7 @@
 name: Premiun_Gift
 version: ${project.version}
+authors:
+  - Primus
+  - Makc Xie
 main: com.qubemc.premium_gift.Main
-api-version: 1.15
+api-version: 1.15.2

@@ -1,5 +1,8 @@
 package com.qubemc.premium_gift;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -14,8 +17,16 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         getLogger().info("Premium Gift Disabled");
-        System.out.print("test");
+    }
+
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (sender instanceof Player) {
+            switch(cmd.getName()) {
+                case "test":
+                    sender.sendMessage("fuck off test");
+                    sender.sendMessage("Please test this code STAT");
+                    // ok Im commiting
+            }
+        }
     }
 }
-
-// fuck off again
