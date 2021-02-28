@@ -53,7 +53,9 @@ public final class Main extends JavaPlugin implements Listener {
                     Inventory inv = ((Player) sender).getInventory();
                     ItemStack[] invContent = inv.getContents();
                     for (ItemStack a: invContent) {
-                        sender.sendMessage(a.getI18NDisplayName() + ":" + a.getAmount());
+                        if (a != null) {
+                            sender.sendMessage(a.getI18NDisplayName() + ":" + a.getAmount());
+                        }
                     }
                     return true;
                 case "gifts":
