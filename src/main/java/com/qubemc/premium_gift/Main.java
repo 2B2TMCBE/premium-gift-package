@@ -1,8 +1,11 @@
 package com.qubemc.premium_gift;
 
+import de.themoep.inventorygui.StaticGuiElement;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,15 +18,20 @@ import org.slf4j.Logger;
 
 import de.themoep.inventorygui.InventoryGui;
 
+import java.util.ArrayList;
+
 public final class Main extends JavaPlugin implements Listener {
 
     // Create an array to store all the Inventory instance (gift packages)
-    Inventory[] giftPacks;
+    ArrayList<Inventory> giftPacks = new ArrayList<Inventory>();
+    // Set up an array to store all the characters for static elements
+    String[] characters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o"};
     // Set up the buttons on the gui
+    // Max package amount allowed: 15
     String[] guiSetup = {
-            "  s i z  ",
-            "  ggggg  ",
-            "  fpdnl  "
+            "  abcde  ",
+            "  fghij  ",
+            "  klmno  "
     };
 
     @Override
@@ -57,9 +65,28 @@ public final class Main extends JavaPlugin implements Listener {
                             sender.sendMessage(a.getI18NDisplayName() + ":" + a.getAmount());
                         }
                     }
+                    this.giftPacks.add(inv);
                     return true;
                 case "gifts":
                     sender.sendMessage("Opening gift menu...");
+                    InventoryGui gui = new InventoryGui(this, (InventoryHolder) sender, "GIFTS", guiSetup);
+                    gui.setFiller(new ItemStack(Material.GRAY_STAINED_GLASS, 1)); // fill the empty slots with this
+                    gui.addElement(new StaticGuiElement('c',
+                            new ItemStack(Material.REDSTONE),
+                            1, // Display a number as the item count
+                            click -> {
+                                if (click.getEvent().getWhoClicked().equals(sender)) {
+                                    click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + "This is a test!");
+                                    return true;
+                                }
+                                return true;
+                            },
+                            "Test Package 1",
+                            "Limited to VIP",
+                            "Expiration: 24h"
+                    ));
+                    gui.show((Player) sender);
+                    return true;
             }
             return false;
         }

@@ -4,12 +4,13 @@ authors:
   - Primus
   - maxxie114
 main: com.qubemc.premium_gift.Main
+api-version: "1.13"
 commands:
   packgift:
     description: package your inventory into a gift and upload to gift menu
     usage: "Usage: /packgift <gift name>"
     permission: op
-  checkgift:
+  gifts:
     description: open a menu to show a list of gift packages
     usage: "Usage: /gifts"
     permission: default
