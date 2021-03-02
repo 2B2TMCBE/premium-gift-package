@@ -25,7 +25,7 @@ public final class Main extends JavaPlugin implements Listener {
     // Create an array to store all the Inventory instance (gift packages)
     ArrayList<Inventory> giftPacks = new ArrayList<Inventory>();
     // Set up an array to store all the characters for static elements
-    String[] characters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o"};
+    Character[] characters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};
     // Set up the buttons on the gui
     // Max package amount allowed: 15
     String[] guiSetup = {
@@ -71,20 +71,23 @@ public final class Main extends JavaPlugin implements Listener {
                     sender.sendMessage("Opening gift menu...");
                     InventoryGui gui = new InventoryGui(this, (InventoryHolder) sender, "GIFTS", guiSetup);
                     gui.setFiller(new ItemStack(Material.GRAY_STAINED_GLASS, 1)); // fill the empty slots with this
-                    gui.addElement(new StaticGuiElement('c',
-                            new ItemStack(Material.REDSTONE),
-                            1, // Display a number as the item count
-                            click -> {
-                                if (click.getEvent().getWhoClicked().equals(sender)) {
-                                    click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + "This is a test!");
+                    for (int i = 0; i < this.giftPacks.size(); i++) {
+                        int finalI = i;
+                        gui.addElement(new StaticGuiElement(this.characters[i],
+                                new ItemStack(Material.GRASS_BLOCK),
+                                1, // Display a number as the item count
+                                click -> {
+                                    if (click.getEvent().getWhoClicked().equals(sender)) {
+                                        click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + "This is Package" + finalI);
+                                        return true;
+                                    }
                                     return true;
-                                }
-                                return true;
-                            },
-                            "Test Package 1",
-                            "Limited to VIP",
-                            "Expiration: 24h"
-                    ));
+                                },
+                                "Test Package" + i,
+                                "Limited to VIP",
+                                "Expiration: 24h"
+                        ));
+                    }
                     gui.show((Player) sender);
                     return true;
             }
