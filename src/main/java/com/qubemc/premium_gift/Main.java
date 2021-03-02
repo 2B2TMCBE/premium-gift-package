@@ -57,6 +57,11 @@ public final class Main extends JavaPlugin implements Listener {
         if (sender instanceof Player) {
             switch(cmd.getName()) {
                 case "packgift":
+                    // Add a maximum package check to prevent error
+                    if (this.giftPacks.size() > 14) {
+                        sender.sendMessage("You have exceeded the maximum gift package creation limit, please delete some packages.");
+                        return false;
+                    }
                     sender.sendMessage("uploaded your inventory.");
                     Inventory inv = ((Player) sender).getInventory();
                     ItemStack[] invContent = inv.getContents();
@@ -83,7 +88,7 @@ public final class Main extends JavaPlugin implements Listener {
                                     }
                                     return true;
                                 },
-                                "Test Package" + i,
+                                "Gift Package " + i,
                                 "Limited to VIP",
                                 "Expiration: 24h"
                         ));
