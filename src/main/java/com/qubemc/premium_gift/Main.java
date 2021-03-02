@@ -83,11 +83,10 @@ public final class Main extends JavaPlugin implements Listener {
                                 1, // Display a number as the item count
                                 click -> {
                                     if (click.getEvent().getWhoClicked().equals(sender)) {
-                                        click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + "Here are the items for this package" + finalI);
-                                        ItemStack[] contents = this.giftPacks.get(finalI);
-                                        for (ItemStack a: contents) {
+                                        click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + "Here are the items for this package: package " + finalI);
+                                        ItemStack[] tempContents = this.giftPacks.get(finalI);
+                                        for (ItemStack a: tempContents) {
                                             if (a != null) {
-                                                click.getEvent().getWhoClicked().sendMessage(a.getI18NDisplayName() + ":" + a.getAmount()); // DEBUG
                                                 click.getEvent().getWhoClicked().getInventory().addItem(a);
                                             }
                                         }
