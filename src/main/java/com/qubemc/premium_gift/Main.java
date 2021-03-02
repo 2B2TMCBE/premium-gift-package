@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public final class Main extends JavaPlugin implements Listener {
 
     // Create an array to store all the Inventory instance (gift packages)
-    ArrayList<Inventory> giftPacks = new ArrayList<Inventory>();
+    ArrayList<ItemStack[]> giftPacks = new ArrayList<ItemStack[]>();
     // Set up an array to store all the characters for static elements
     Character[] characters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};
     // Set up the buttons on the gui
@@ -70,7 +70,7 @@ public final class Main extends JavaPlugin implements Listener {
                             sender.sendMessage(a.getI18NDisplayName() + ":" + a.getAmount());
                         }
                     }
-                    this.giftPacks.add(inv);
+                    this.giftPacks.add(invContent);
                     return true;
                 case "gifts":
                     sender.sendMessage("Opening gift menu...");
@@ -79,11 +79,18 @@ public final class Main extends JavaPlugin implements Listener {
                     for (int i = 0; i < this.giftPacks.size(); i++) {
                         int finalI = i;
                         gui.addElement(new StaticGuiElement(this.characters[i],
-                                new ItemStack(Material.GRASS_BLOCK),
+                                new ItemStack(Material.DIAMOND_BLOCK),
                                 1, // Display a number as the item count
                                 click -> {
                                     if (click.getEvent().getWhoClicked().equals(sender)) {
-                                        click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + "This is Package" + finalI);
+                                        click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + "Here are the items for this package" + finalI);
+                                        ItemStack[] contents = this.giftPacks.get(finalI);
+                                        for (ItemStack a: contents) {
+                                            if (a != null) {
+                                                click.getEvent().getWhoClicked().sendMessage(a.getI18NDisplayName() + ":" + a.getAmount()); // DEBUG
+                                                click.getEvent().getWhoClicked().getInventory().addItem(a);
+                                            }
+                                        }
                                         return true;
                                     }
                                     return true;
