@@ -24,7 +24,8 @@ public final class Main extends JavaPlugin implements Listener {
 
     // Create an array to store all the Inventory instance (gift packages)
     ArrayList<ItemStack[]> giftPacks = new ArrayList<ItemStack[]>();
-    // Set up an array to store all the characters for static elements
+    // Arraylist to store exp date and perm group
+    ArrayList<String[]> packs = new ArrayList<String[]>();
     Character[] characters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};
     // Set up the buttons on the gui
     // Max package amount allowed: 15
@@ -38,7 +39,8 @@ public final class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         getLogger().info("Premium Gift Enabled");
-        getServer().getPluginManager().registerEvents(this, this);
+        this.getConfig().options().copyDefaults(true);
+        this.saveDefaultConfig();
     }
 
     @Override
@@ -47,19 +49,13 @@ public final class Main extends JavaPlugin implements Listener {
         getLogger().info("Premium Gift Disabled");
     }
 
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent ev) {
-        ev.getPlayer().sendMessage("Welcome to test server"); // DEBUG
-    }
-
-
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
             switch(cmd.getName()) {
                 case "packgift":
                     // Add a maximum package check to prevent error
                     if (this.giftPacks.size() > 14) {
-                        sender.sendMessage("You have exceeded the maximum gift package creation limit, please delete some packages.");
+                        sender.sendMessage(this.getConfig().getString("exceedMaxPackCount"));
                         return false;
                     }
                     sender.sendMessage("uploaded your inventory.");
