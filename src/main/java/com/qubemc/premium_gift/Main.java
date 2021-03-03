@@ -59,7 +59,6 @@ public final class Main extends JavaPlugin implements Listener {
                 case "packgift":
                     // make sure all args of command are provided
                     if (args.length < 2) {
-                        sender.sendMessage("[DEBUG]length=" + args.length); // DEBUG
                         return false;
                     }
 
@@ -74,13 +73,11 @@ public final class Main extends JavaPlugin implements Listener {
 
                     // Make sure only numbers are provided
                     if (!StringUtils.isNumeric(args[0])) {
-                        sender.sendMessage("[DEBUG]isNumeric=" + StringUtils.isNumeric(args[0])); // DEBUG
                         return false;
                     }
 
                     // Make sure only the five permission levels are provided
                     if (!lst.contains(args[1])) {
-                        sender.sendMessage("[DEBUG]args1=" + args[1]); // DEBUG
                         return false;
                     }
 
@@ -94,7 +91,8 @@ public final class Main extends JavaPlugin implements Listener {
                     }
 
                     // Create a copy of the array to prevent the inventoryClear issue
-                    this.giftPacks.add(invContent.clone());
+                    ItemStack[] newStack = invContent.clone();
+                    this.giftPacks.add(newStack);
 
                     // process expiration date and permission group
                     // get current unix time in hours
