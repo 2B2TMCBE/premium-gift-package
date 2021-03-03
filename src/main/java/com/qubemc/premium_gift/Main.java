@@ -1,6 +1,7 @@
 package com.qubemc.premium_gift;
 
 import de.themoep.inventorygui.StaticGuiElement;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -19,13 +20,16 @@ import org.slf4j.Logger;
 import de.themoep.inventorygui.InventoryGui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public final class Main extends JavaPlugin implements Listener {
 
     // Create an array to store all the Inventory instance (gift packages)
     ArrayList<ItemStack[]> giftPacks = new ArrayList<ItemStack[]>();
     // Arraylist to store exp date and perm group
-    ArrayList<String[]> packs = new ArrayList<String[]>();
+    // [exp, permGroup]
+    ArrayList<String[]> giftPacksData = new ArrayList<String[]>();
     Character[] characters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};
     // Set up the buttons on the gui
     // Max package amount allowed: 15
@@ -53,37 +57,85 @@ public final class Main extends JavaPlugin implements Listener {
         if (sender instanceof Player) {
             switch(cmd.getName()) {
                 case "packgift":
-                    // Add a maximum package check to prevent error
-                    if (this.giftPacks.size() > 14) {
-                        sender.sendMessage(this.getConfig().getString("exceedMaxPackCount"));
+                    // make sure all args of command are provided
+                    if (args.length < 2) {
+                        sender.sendMessage("[DEBUG]length=" + args.length); // DEBUG
                         return false;
                     }
-                    sender.sendMessage(this.getConfig().getString("inventoryUploaded"));
+
+                    // Add a maximum package check to prevent error
+                    if (this.giftPacks.size() > 14) {
+                        sender.sendMessage(ChatColor.RED + this.getConfig().getString("exceedMaxPackCount"));
+                        return false;
+                    }
+
+                    String[] permissions = {"level1","level2","level3","level4","level5"};
+                    List<String> lst = Arrays.asList(permissions);
+
+                    // Make sure only numbers are provided
+                    if (!StringUtils.isNumeric(args[0])) {
+                        sender.sendMessage("[DEBUG]isNumeric=" + StringUtils.isNumeric(args[0])); // DEBUG
+                        return false;
+                    }
+
+                    // Make sure only the five permission levels are provided
+                    if (!lst.contains(args[1])) {
+                        sender.sendMessage("[DEBUG]args1=" + args[1]); // DEBUG
+                        return false;
+                    }
+
+                    sender.sendMessage(ChatColor.GREEN + this.getConfig().getString("inventoryUploaded"));
                     Inventory inv = ((Player) sender).getInventory();
                     ItemStack[] invContent = inv.getContents();
                     for (ItemStack a: invContent) {
                         if (a != null) {
-                            sender.sendMessage(a.getI18NDisplayName() + ":" + a.getAmount());
+                            sender.sendMessage(ChatColor.GREEN + a.getI18NDisplayName() + ":" + a.getAmount());
                         }
                     }
-                    this.giftPacks.add(invContent);
+
+                    // Create a copy of the array to prevent the inventoryClear issue
+                    this.giftPacks.add(invContent.clone());
+
+                    // process expiration date and permission group
+                    // get current unix time in hours
+                    Long unixTime = System.currentTimeMillis() / 1000L / 3600L;
+                    String newTime = Long.toString(unixTime + Integer.parseInt(args[0]));
+                    String[] data = new String[2];
+                    data[0] = newTime;
+                    data[1] = args[1];
+                    this.giftPacksData.add(data);
                     return true;
                 case "gifts":
-                    sender.sendMessage(this.getConfig().getString("giftMenuOpen"));
+                    sender.sendMessage(ChatColor.GREEN + this.getConfig().getString("giftMenuOpen"));
                     InventoryGui gui = new InventoryGui(this, (InventoryHolder) sender, "GIFTS", guiSetup);
                     gui.setFiller(new ItemStack(Material.GRAY_STAINED_GLASS, 1)); // fill the empty slots with this
                     for (int i = 0; i < this.giftPacks.size(); i++) {
                         int finalI = i;
+                        Long currentTimeInH = System.currentTimeMillis() / 1000L / 3600L;
+                        // Check expiration
+                        if (Integer.parseInt(this.giftPacksData.get(i)[0]) < currentTimeInH) {
+                            continue;
+                        }
+
+                        int expirationTime = Integer.parseInt(this.giftPacksData.get(i)[0]);
+
                         gui.addElement(new StaticGuiElement(this.characters[i],
                                 new ItemStack(Material.DIAMOND_BLOCK),
                                 1, // Display a number as the item count
                                 click -> {
-                                    if (click.getEvent().getWhoClicked().equals(sender)) {
-                                        click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + this.getConfig().getString("packageGiven"));
+                                    Player player = (Player) click.getEvent().getWhoClicked();
+                                    if (!player.hasPermission("premiumgift." + this.giftPacksData.get(finalI)[1])) {
+                                        player.sendMessage(ChatColor.RED + this.getConfig().getString("missingPermission"));
+                                        return true;
+                                    }
+
+                                    if (player.equals(sender)) {
+                                        player.sendMessage(ChatColor.GREEN + this.getConfig().getString("packageGiven"));
                                         ItemStack[] tempContents = this.giftPacks.get(finalI);
                                         for (ItemStack a: tempContents) {
                                             if (a != null) {
-                                                click.getEvent().getWhoClicked().getInventory().addItem(a);
+                                                player.sendMessage(ChatColor.GREEN + "[DEBUG]" + a.getI18NDisplayName() + ":" + a.getAmount());
+                                                player.getInventory().addItem(a);
                                             }
                                         }
                                         return true;
@@ -91,7 +143,8 @@ public final class Main extends JavaPlugin implements Listener {
                                     return true;
                                 },
                                 this.getConfig().getString("packageName") + " " + i,
-                                this.getConfig().getString("expiration") + "24h"
+                                this.getConfig().getString("expiration") + " " + (expirationTime - currentTimeInH) +
+                                        this.getConfig().getString("hours")
                         ));
                     }
                     gui.show((Player) sender);
