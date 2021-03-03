@@ -58,7 +58,7 @@ public final class Main extends JavaPlugin implements Listener {
                         sender.sendMessage(this.getConfig().getString("exceedMaxPackCount"));
                         return false;
                     }
-                    sender.sendMessage("uploaded your inventory.");
+                    sender.sendMessage(this.getConfig().getString("inventoryUploaded"));
                     Inventory inv = ((Player) sender).getInventory();
                     ItemStack[] invContent = inv.getContents();
                     for (ItemStack a: invContent) {
@@ -69,7 +69,7 @@ public final class Main extends JavaPlugin implements Listener {
                     this.giftPacks.add(invContent);
                     return true;
                 case "gifts":
-                    sender.sendMessage("Opening gift menu...");
+                    sender.sendMessage(this.getConfig().getString("giftMenuOpen"));
                     InventoryGui gui = new InventoryGui(this, (InventoryHolder) sender, "GIFTS", guiSetup);
                     gui.setFiller(new ItemStack(Material.GRAY_STAINED_GLASS, 1)); // fill the empty slots with this
                     for (int i = 0; i < this.giftPacks.size(); i++) {
@@ -79,7 +79,7 @@ public final class Main extends JavaPlugin implements Listener {
                                 1, // Display a number as the item count
                                 click -> {
                                     if (click.getEvent().getWhoClicked().equals(sender)) {
-                                        click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + "Here are the items for this package: package " + finalI);
+                                        click.getEvent().getWhoClicked().sendMessage(ChatColor.RED + this.getConfig().getString("packageGiven"));
                                         ItemStack[] tempContents = this.giftPacks.get(finalI);
                                         for (ItemStack a: tempContents) {
                                             if (a != null) {
@@ -90,9 +90,8 @@ public final class Main extends JavaPlugin implements Listener {
                                     }
                                     return true;
                                 },
-                                "Gift Package " + i,
-                                "Limited to VIP",
-                                "Expiration: 24h"
+                                this.getConfig().getString("packageName") + " " + i,
+                                this.getConfig().getString("expiration") + "24h"
                         ));
                     }
                     gui.show((Player) sender);

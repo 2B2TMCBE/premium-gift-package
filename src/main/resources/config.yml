@@ -1,1 +1,6 @@
 exceedMaxPackCount: "You have exceeded the maximum gift package creation limit, please delete some packages."
+inventoryUploaded: "uploaded your inventory."
+giftMenuOpen: "Opening gift menu..."
+packageGiven: "Here are the items for this package."
+packageName: "Gift Package"
+expiration: "Expiration:"
