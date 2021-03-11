@@ -17,18 +17,18 @@
 # 安裝
 - 本安裝指南僅適用於Debian Linux，Windows請從 https://https://github.com/2B2TMCBE/premium-gift-package/releases 下載最新的jar文件，然後繼續執行步驟7。
 
-1.要求安裝紙釘。
-2.使用以下命令下載maven：
-```sudo apt-get install maven```
-3.安裝後，運行以下命令來克隆此git存儲庫：
-```git clone https：//github.com/2B2TMCBE/premium-gift-package.git```
-4.將目錄更改為插件的基本目錄，該目錄包含名為pom.xml的文件
-5.運行此命令以使用maven編譯插件
-```mvn clean package```
-6.等到編譯過程完成後，現在應該創建一個名為“target”的新目錄，進入目錄。
-7.將名為“ premium_gift-1.0-SNAPSHOT-shaded.jar”的jar文件移至Paper的服務器目錄，並將其移至名為plugins的目錄。
-8.重新啟動服務器，應安裝插件。
+- 1.要求安裝紙釘。
+- 2.使用以下命令下載maven：
+  ```sudo apt-get install maven```
+- 3.安裝後，運行以下命令來克隆此git存儲庫：
+  ```git clone https：//github.com/2B2TMCBE/premium-gift-package.git```
+- 4.將目錄更改為插件的基本目錄，該目錄包含名為pom.xml的文件
+- 5.運行此命令以使用maven編譯插件
+  ```mvn clean package```
+- 6.等到編譯過程完成後，現在應該創建一個名為“target”的新目錄，進入目錄。
+- 7.將名為“ premium_gift-1.0-SNAPSHOT-shaded.jar”的jar文件移至Paper的服務器目錄，並將其移至名為plugins的目錄。
+- 8.重新啟動服務器，應安裝插件。
 # 貢獻
--這個項目是開放的，可以拉取請求，每個人都可以使用，分叉，私有化或修改此插件
+- 這個項目是開放的，可以拉取請求，每個人都可以使用，分叉，私有化或修改此插件
 # 執照
 MIT許可證
