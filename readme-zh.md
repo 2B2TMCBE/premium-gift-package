@@ -14,6 +14,17 @@
   - 允許玩家領取禮物
 - /packgift <以小時為單位的到期時間> <權限組（level1，level2, level3, level4，level5)>
   - 允許管理員根據其庫存數據創建禮物包裝，並定義到期日期和權限組
+# 權限組
+  -該插件具有五個不同的權限組，分別為1,2,3,4和5級。
+  -可以通過任何權限插件將這些權限組分配給不同的用戶。
+  -這些是權限代碼 
+```
+ premiumgift.level1
+ premiumgift.level2
+ premiumgift.level3
+ premiumgift.level4
+ premiumgift.level5
+ ```
 # 安裝
 - 本安裝指南僅適用於Debian Linux，Windows請從 https://https://github.com/2B2TMCBE/premium-gift-package/releases 下載最新的jar文件，然後繼續執行步驟7。
 
