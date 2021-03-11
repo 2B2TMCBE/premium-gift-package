@@ -16,6 +16,17 @@
   - Allow Players to claim a gift
 - /packgift <expiration in hours> <permission group(level1, level2, level3, level4, level5)>
   - Allow admin to create a giftpackage from their inventory data and define the expiration date, and permission group
+# Permission group
+ - This plugin have five different permission group, level 1,2,3,4, and 5.
+ - These permission groups can be assigned to different users via any permission plugins.
+ - These are the permission code
+ ```
+ premiumgift.level1
+ premiumgift.level2
+ premiumgift.level3
+ premiumgift.level4
+ premiumgift.level5
+ ```
 # Installation
 - This installation guide is for Debian linux only, windows please download the newest jar file from https://github.com/2B2TMCBE/2b2tpe/releases and then proceed to step 7.
 
