@@ -33,7 +33,7 @@ giftMenuOpen:"正在打開禮物菜單..."
 packageGiven:"這是該包裹的物品。"
 packageName:"禮品包裝”
 expiration:"到期時間："
-missingPermission:"您無權申領此軟件包。"
+missingPermission:"您無權申領此禮包。"
 hours:"小时"
 ```
 # 注意事項
