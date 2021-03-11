@@ -1,3 +1,5 @@
+中文版README[https://github.com/2B2TMCBE/premium-gift-package/blob/main/readme-zh.md]
+
 # Premium Gift Package
 - This is a plugin that allows admin to copy their inventory as a gift packages and publish to five different permission groups, these permission groups can claim these packages with a command with the predefined permissions.
 # Features
