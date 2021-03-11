@@ -25,6 +25,20 @@
  premiumgift.level4
  premiumgift.level5
  ```
+# 配置文件
+```
+beyondMaxPackCount:"您已經超過了禮品包裝盒創建的最大限制，請刪除一些包裝盒。"
+inventoryUploaded:"已上傳您的廣告資源。"
+giftMenuOpen:"正在打開禮物菜單..."
+packageGiven:"這是該包裹的物品。"
+packageName:"禮品包裝”
+expiration:"到期時間："
+missingPermission:"您無權申領此軟件包。"
+hours:"小时"
+```
+# 注意事項
+- 目前插件有一個bug, 當管理員使用/clear來清空自己背包的時候會清空所有禮包裡面的內容，所以不要用那個命令
+- **所有數據暫時無法離線保存，意思就是當服務器重啟時所有數據會丟失**
 # 安裝
 - 本安裝指南僅適用於Debian Linux，Windows請從 https://https://github.com/2B2TMCBE/premium-gift-package/releases 下載最新的jar文件，然後繼續執行步驟7。
 
