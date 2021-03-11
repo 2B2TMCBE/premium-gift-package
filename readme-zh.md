@@ -42,7 +42,7 @@ hours:"小时"
 # 安裝
 - 本安裝指南僅適用於Debian Linux，Windows請從 https://https://github.com/2B2TMCBE/premium-gift-package/releases 下載最新的jar文件，然後繼續執行步驟7。
 
-- 1.要求安裝紙釘。
+- 1.要求安裝PaperMC。
 - 2.使用以下命令下載maven：
   ```sudo apt-get install maven```
 - 3.安裝後，運行以下命令來克隆此git存儲庫：
@@ -56,4 +56,4 @@ hours:"小时"
 # 貢獻
 - 這個項目是開放的，可以拉取請求，每個人都可以使用，分叉，私有化或修改此插件
 # 執照
-MIT許可證
+[MIT許可證](https://github.com/2B2TMCBE/premium-gift-package/blob/main/LICENSE)
