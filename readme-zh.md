@@ -14,6 +14,12 @@
   - 允許玩家領取禮物
 - /packgift <以小時為單位的到期時間(僅數字)> <權限組（level1，level2, level3, level4，level5)>
   - 允許管理員根據其庫存數據創建禮物包裝，並定義到期日期和權限組
+# 權限實例  
+- 我們只使用過LuckPerm，所以我們只能用LuckPerm作為實例
+- 比方說在LuckPerm裡面你想給一個玩家level1權限，你就用這個命令:
+```
+/lp user <玩家名字> permission set premiumgift.level1 true
+```
 # 權限組
   - 該插件具有五個不同的權限組，分別為1,2,3,4和5級。
   - 可以通過任何權限插件將這些權限組分配給不同的用戶。
