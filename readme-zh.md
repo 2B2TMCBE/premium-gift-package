@@ -15,7 +15,9 @@
 - /packgift <以小時為單位的到期時間(僅數字)> <權限組（level1，level2, level3, level4，level5)>
   - 允許管理員根據其庫存數據創建禮物包裝，並定義到期日期和權限組
 # 權限實例  
+- 設置權限需要用到一個第三方權限插件，比方說LuckPerms
 - 我們只使用過LuckPerm，所以我們只能用LuckPerm作為實例
+- 在這裡下載LuckPerms: https://www.spigotmc.org/resources/luckperms.28140/
 - 比方說在LuckPerm裡面你想給一個玩家level1權限，你就用這個命令:
 ```
 /lp user <玩家名字> permission set premiumgift.level1 true
