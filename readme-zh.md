@@ -12,7 +12,7 @@
 # 命令
 - /gift
   - 允許玩家領取禮物
-- /packgift <以小時為單位的到期時間> <權限組（level1，level2, level3, level4，level5)>
+- /packgift <以小時為單位的到期時間(僅數字)> <權限組（level1，level2, level3, level4，level5)>
   - 允許管理員根據其庫存數據創建禮物包裝，並定義到期日期和權限組
 # 權限組
   - 該插件具有五個不同的權限組，分別為1,2,3,4和5級。
